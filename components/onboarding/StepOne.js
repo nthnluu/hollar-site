@@ -13,6 +13,7 @@ const StepOne = ({currentStep, onContinue, formData, setFormData}) => {
 
     return <form onSubmit={onContinue}>
         <div className="space-y-4">
+
             {/*Business name*/}
             <TextInput id="business_name" onChange={event => setFormData(prevState => ({
                 ...prevState,
