@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function GoogleMaps({onChange, initialValue}) {
+export default function GoogleMaps({onChange, initialValue, apiKey}) {
     const classes = useStyles();
     const [value, setValue] = React.useState(initialValue);
     const [inputValue, setInputValue] = React.useState('');
@@ -41,7 +41,7 @@ export default function GoogleMaps({onChange, initialValue}) {
     if (typeof window !== 'undefined' && !loaded.current) {
         if (!document.querySelector('#google-maps')) {
             loadScript(
-                'https://maps.googleapis.com/maps/api/js?key=AIzaSyCyfwYDqwtqBRTYQ8fb7j-DjxOVmHDOw-o&libraries=places',
+                `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`,
                 document.querySelector('head'),
                 'google-maps',
             );
