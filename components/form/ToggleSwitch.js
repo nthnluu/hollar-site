@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 
 export default function ToggleSwitch({label, value, onChange}) {
 
     return <Switch.Group as="div" className="flex items-center">
-        <Switch.Label className="sr-only">Enable notifications</Switch.Label>
+        <Switch.Label className="sr-only">{label}</Switch.Label>
         <Switch
             as="button"
             checked={value}
