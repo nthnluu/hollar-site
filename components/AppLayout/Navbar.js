@@ -158,7 +158,7 @@ export default function Navbar({loading}) {
     const [mobileMenu, toggleMobileMenu] = useState(false)
 
 
-    return <header className="bg-white shadow-sm relative">
+    return <header className="bg-white shadow relative">
         <div className="absolute bottom-0 w-full">
             <LoadingBar hidden={!loading}/>
         </div>

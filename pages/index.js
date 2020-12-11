@@ -6,7 +6,7 @@ export default function Home() {
         <div className="mx-auto max-w-4xl">
             <div className="border-b flex justify-between items-center py-4 mb-24">
                 <h2 className="text-2xl font-bold">Hollar</h2>
-                <Link href="/signin">
+                <Link href="/dashboard">
                     <a className="border rounded-full px-3 py-1">Business sign in</a>
                 </Link>
 
