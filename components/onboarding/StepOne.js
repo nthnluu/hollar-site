@@ -2,14 +2,7 @@ import TextInput from "../form/TextInput";
 import Steps from "./Steps";
 import SelectInput from "../form/SelectInput";
 
-const StepOne = ({currentStep, onContinue, formData, setFormData}) => {
-    const stateAbbreviations = [
-        'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA',
-        'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA',
-        'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND',
-        'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
-        'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'
-    ];
+const StepTwo = ({currentStep, onContinue, formData, setFormData}) => {
 
     return <form onSubmit={onContinue}>
         <div className="space-y-4">
@@ -20,47 +13,8 @@ const StepOne = ({currentStep, onContinue, formData, setFormData}) => {
                 businessName: event.target.value
             }))} value={formData.businessName} autoComplete="off" label="Business name" required/>
 
-            <div className="flex justify-between">
+            <h3 className="mt-6 flex justify-center">By continuing you agree to Hollar's Terms of Service and Privacy Policy</h3>
 
-                {/*Street Address*/}
-                <TextInput id="street_address" onChange={event => setFormData(prevState => ({
-                    ...prevState,
-                    streetAddress: event.target.value
-                }))} value={formData.streetAddress} autoComplete="street-address" label="Street address" required
-                           type="text"/>
-
-                {/*Suite/Unit*/}
-                <div className="w-1/4">
-                    <TextInput id="unit" onChange={event => setFormData(prevState => ({
-                        ...prevState,
-                        unit: event.target.value
-                    }))} value={formData.unit} autoComplete="off" label="Suite/Unit"/>
-                </div>
-
-            </div>
-
-            <div className="grid grid-cols-3 gap-3">
-
-                {/*City*/}
-                <TextInput id="city" onChange={event => setFormData(prevState => ({
-                    ...prevState,
-                    city: event.target.value
-                }))} value={formData.city} autoComplete="address-level2" label="City" type="text"/>
-
-                {/*State*/}
-                <SelectInput values={stateAbbreviations} label="State" id="state" autoComplete="address-level1"
-                             value={formData.state} onChange={event => setFormData(prevState => ({
-                    ...prevState,
-                    state: event.target.value
-                }))}/>
-
-                {/*Zip Code*/}
-                <TextInput id="zip" onChange={event => setFormData(prevState => ({
-                    ...prevState,
-                    zip: event.target.value
-                }))} value={formData.zip} autoComplete="postal-code" label="ZIP/Postal Code" type="text"/>
-
-            </div>
         </div>
 
         <div className="flex justify-between items-center mt-10">
@@ -74,9 +28,7 @@ const StepOne = ({currentStep, onContinue, formData, setFormData}) => {
                 </button>
             </div>
         </div>
-        <h3 className="font-thin mt-4 flex justify-center">By continuing you agree to the
-            <a href="#">Terms of Service and</a> <a href="#">Privacy Policy</a> </h3>
     </form>
 }
 
-export default StepOne
+export default StepTwo

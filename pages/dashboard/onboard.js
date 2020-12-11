@@ -1,11 +1,14 @@
 import {useState} from "react";
 import StepOne from "../../components/onboarding/StepOne";
 import StepTwo from "../../components/onboarding/StepTwo";
+import StepThree from "../../components/onboarding/StepThree";
+
 
 export default function Onboard() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0)
     const [formData, setFormData] = useState({
         name: "",
+        category: "",
         streetAddress: "",
         unit: "",
         city: "",
@@ -21,14 +24,19 @@ export default function Onboard() {
 
     const steps = [
         {
-            title: "Business Info",
+            title: "What's the name of your business?",
             content: <StepOne currentStep={currentStepIndex} onContinue={onContinue} formData={formData}
                               setFormData={setFormData}/>
         },
         {
+            title: "Location Details",
+            content: <StepTwo currentStep={currentStepIndex} onContinue={onContinue} formData={formData}
+                              setFormData={setFormData} onBack={() => setCurrentStepIndex(0)}/>
+        },
+        {
             title: "Payment Methods",
             description: "What payment methods would you like to accept?",
-            content: <StepTwo currentStep={currentStepIndex} onBack={() => setCurrentStepIndex(0)}/>
+            content: <StepThree currentStep={currentStepIndex} onBack={() => setCurrentStepIndex(0)}/>
         }]
 
     const currentStep = steps[currentStepIndex]
