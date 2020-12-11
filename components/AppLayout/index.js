@@ -21,7 +21,7 @@ const PageContent = ({session, sidebar, content}) => {
 
     return <SessionContext.Provider value={session}>
         <WithGraphQL token={session.token}>
-            <PageContext.Provider value={{pushLink}}>
+            <PageContext.Provider value={{pushLink, currentUser: session.userProfile}}>
                 <div className="bg-gray-100">
                     <Navbar loading={isLoading}/>
                     <main
