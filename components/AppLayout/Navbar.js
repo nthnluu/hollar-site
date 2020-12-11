@@ -2,6 +2,14 @@ import {Menu, Transition} from "@headlessui/react";
 import {useContext, useState} from "react";
 import SessionContext from "../../lib/SessionContext";
 import UserAvatar from "../visual/UserAvatar";
+import fb from "../../lib/firebase-config";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import LoadingBar from "../visual/LoadingBar";
+
+// Signs out the current Firebase Auth user
+const signOut = () => {
+    fb.auth().signOut()
+}
 
 // Button that displays an account dropdown when clicked
 const ProfileDropdown = () => {
@@ -75,8 +83,7 @@ const ProfileDropdown = () => {
                                 <div className="py-1">
                                     <Menu.Item>
                                         {({active}) => (
-                                            <a
-                                                href="#sign-out"
+                                            <button onClick={signOut}
                                                 className={`${
                                                     active
                                                         ? "bg-gray-100 text-gray-900"
@@ -84,7 +91,7 @@ const ProfileDropdown = () => {
                                                 } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
                                             >
                                                 Sign out
-                                            </a>
+                                            </button>
                                         )}
                                     </Menu.Item>
                                 </div>
@@ -147,11 +154,14 @@ const MobileMenu = () => {
     </nav>
 }
 
-export default function Navbar() {
+export default function Navbar({loading}) {
     const [mobileMenu, toggleMobileMenu] = useState(false)
 
 
-    return <header className="bg-white shadow">
+    return <header className="bg-white shadow-sm relative">
+        <div className="absolute bottom-0 w-full">
+            <LoadingBar hidden={!loading}/>
+        </div>
         <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:divide-y lg:divide-gray-200 lg:px-8">
             <div className="relative h-16 flex justify-between">
                 <div className="relative z-10 px-2 flex lg:px-0">
