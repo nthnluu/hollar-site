@@ -3,6 +3,7 @@ const admin = require("firebase-admin");
 admin.initializeApp(functions.config().firebase);
 
 const axios = require('axios');
+const geofire = require('geofire');
 
 // On sign up.
 exports.processSignUp = functions.auth.user().onCreate(user => {
@@ -61,6 +62,15 @@ exports.createBusiness = functions.https.onCall((data, context) => {
             }
         }
     })
-        .then((res) => console.log(JSON.stringify(res.data.errors)))
+        .then((res) => {
+            // Add newly created business to location index
+            const firebaseRef = admin.database().ref('businessLocations');
+            let geoFire = new geofire.GeoFire(firebaseRef);
+            geoFire.set(res.data.data['insert_business'].returning[0].id, [lat, long])
+                .then(() => {
+                    console.log("Provided key has been added to GeoFire");
+                })
+                .catch((error) => console.log(`Error: ${error}`))
+        })
         .catch(error => console.log(error))
 });
