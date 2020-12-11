@@ -31,7 +31,7 @@ export default function Onboard() {
         },
         //Step 2
         {
-            title: "Location Details",
+            title: "Where are you located?",
             content: <StepTwo currentStep={currentStepIndex} onContinue={onContinue} formData={formData}
                               setFormData={setFormData} onBack={() => setCurrentStepIndex(0)}/>
         },
