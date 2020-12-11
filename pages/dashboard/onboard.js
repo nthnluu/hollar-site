@@ -1,15 +1,19 @@
 import {useEffect, useState} from "react";
 import StepOne from "../../components/onboarding/StepOne";
 import StepTwo from "../../components/onboarding/StepTwo";
-import AddressAutocomplete from "../../components/form/AddressAutocomplete";
-import fb from "../../lib/firebase-config";
+import StepThree from "../../components/onboarding/StepThree";
+import StepFour from "../../components/onboarding/StepFour";
 
 export default function Onboard() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0)
     const [formData, setFormData] = useState({
-        businessName: "",
-        website: "",
-        locationCount: 1
+        name: "",
+        streetAddress: "",
+        unit: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        category: "",
     })
 
     const onContinue = (event) => {
@@ -19,15 +23,29 @@ export default function Onboard() {
     }
 
     const steps = [
+        //Step 1
         {
-            title: "Business Info",
+            title: "What's the name of your business?",
             content: <StepOne currentStep={currentStepIndex} onContinue={onContinue} formData={formData}
                               setFormData={setFormData}/>
         },
+        //Step 2
         {
-            title: "Payment Methods",
-            description: "What payment methods would you like to accept?",
-            content: <StepTwo currentStep={currentStepIndex} onBack={() => setCurrentStepIndex(0)}/>
+            title: "Location Details",
+            content: <StepTwo currentStep={currentStepIndex} onContinue={onContinue} formData={formData}
+                              setFormData={setFormData} onBack={() => setCurrentStepIndex(0)}/>
+        },
+        //Step 3
+        {
+            title: "Choose a category",
+            content: <StepThree currentStep={currentStepIndex} onContinue={onContinue} formData={formData}
+                              setFormData={setFormData} onBack={() => setCurrentStepIndex(1)}/>
+        },
+        //Step 4
+        {
+            title: "Verify your info",
+            content: <StepFour currentStep={currentStepIndex} onContinue={onContinue} formData={formData}
+                              setFormData={setFormData} onBack={() => setCurrentStepIndex(2)}/>
         }]
 
     const currentStep = steps[currentStepIndex]
