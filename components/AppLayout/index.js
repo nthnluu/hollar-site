@@ -1,6 +1,5 @@
 import Navbar from "./Navbar";
 import {useState} from "react";
-import SessionContext from "../../lib/SessionContext";
 import {useRouter} from "next/router";
 import WithGraphQL from "../../lib/with-graphql";
 import useSession from "../../lib/useSession";
@@ -19,25 +18,23 @@ const PageContent = ({session, sidebar, content}) => {
             .catch(() => toggleIsLoading(false))
     }
 
-    return <SessionContext.Provider value={session}>
-        <WithGraphQL token={session.token}>
-            <PageContext.Provider value={{pushLink, currentUser: session.userProfile}}>
-                <div className="bg-gray-100">
-                    <Navbar loading={isLoading}/>
-                    <main
-                        className={`max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 ${isLoading && "opacity-25 pointer-events-none"} transition-opacity duration-300`}>
-                        <div className={`${sidebar && 'lg:grid'} lg:grid-cols-12 lg:gap-x-5`}>
-                            {sidebar &&  <Sidebar onClick={val => console.log(`You clicked on the ${val} button!`)} sidebar={sidebar}/>}
-                            {/* Payment details */}
-                            <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-                                {content}
-                            </div>
+    return <WithGraphQL token={session.token}>
+        <PageContext.Provider value={{pushLink, currentUser: session.userProfile}}>
+            <div className="bg-gray-100">
+                <Navbar loading={isLoading}/>
+                <main
+                    className={`max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 ${isLoading && "opacity-25 pointer-events-none"} transition-opacity duration-300`}>
+                    <div className={`${sidebar && 'lg:grid'} lg:grid-cols-12 lg:gap-x-5`}>
+                        {sidebar &&  <Sidebar onClick={val => console.log(`You clicked on the ${val} button!`)} sidebar={sidebar}/>}
+                        {/* Payment details */}
+                        <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+                            {content}
                         </div>
-                    </main>
-                </div>
-            </PageContext.Provider>
-        </WithGraphQL>
-    </SessionContext.Provider>
+                    </div>
+                </main>
+            </div>
+        </PageContext.Provider>
+    </WithGraphQL>
 }
 
 export default function AppLayout({sidebar, children}) {

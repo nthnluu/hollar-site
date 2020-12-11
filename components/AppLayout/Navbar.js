@@ -1,11 +1,9 @@
 import {Menu, Transition} from "@headlessui/react";
-import {useContext, useState} from "react";
-import SessionContext from "../../lib/SessionContext";
+import {useState} from "react";
 import UserAvatar from "../visual/UserAvatar";
 import fb from "../../lib/firebase-config";
 import LoadingBar from "../visual/LoadingBar";
-import Link from "next/link";
-import PageContext from "../../lib/PageContext";
+import useAppContext from "../../lib/useAppContext";
 
 const links = [{
     name: "Dashboard",
@@ -28,7 +26,7 @@ const signOut = () => {
 
 // Button that displays an account dropdown when clicked
 const ProfileDropdown = () => {
-    const {userProfile} = useContext(SessionContext)
+    const {currentUser} = useAppContext()
     return <div className="flex-shrink-0 relative ml-4">
         <div>
             <Menu>
@@ -39,7 +37,7 @@ const ProfileDropdown = () => {
                             id="user-menu" aria-haspopup="true">
                             <span className="sr-only">Open user menu</span>
                             <div className="h-8 w-8">
-                                <UserAvatar profile={userProfile}/>
+                                <UserAvatar profile={currentUser}/>
                             </div>
                         </Menu.Button>
 
@@ -60,7 +58,7 @@ const ProfileDropdown = () => {
                                 <div className="px-4 py-3">
                                     <p className="text-sm leading-5">Signed in as</p>
                                     <p className="text-sm font-medium leading-5 text-gray-900 truncate">
-                                        {userProfile.email}
+                                        {currentUser.email}
                                     </p>
                                 </div>
 
@@ -121,8 +119,7 @@ const ProfileDropdown = () => {
 
 // Mobile navigation menu; only visible on small screens
 const MobileMenu = () => {
-    const {userProfile} = useContext(SessionContext)
-    const {pushLink} = useContext(PageContext)
+    const {currentUser, pushLink} = useAppContext()
 
     return <nav className="lg:hidden" aria-label="Global">
         <div className="pt-2 pb-3 px-2 space-y-1">
@@ -136,12 +133,12 @@ const MobileMenu = () => {
             <div className="px-4 flex items-center">
                 <div className="flex-shrink-0">
                     <div className="h-10 w-10">
-                        <UserAvatar profile={userProfile}/>
+                        <UserAvatar profile={currentUser}/>
                     </div>
                 </div>
                 <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">{userProfile.displayName}</div>
-                    <div className="text-sm font-medium text-gray-500">{userProfile.email}</div>
+                    <div className="text-base font-medium text-gray-800">{currentUser.displayName}</div>
+                    <div className="text-sm font-medium text-gray-500">{currentUser.email}</div>
                 </div>
                 <button
                     className="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900">
@@ -170,8 +167,7 @@ const MobileMenu = () => {
 
 export default function Navbar({loading}) {
     const [mobileMenu, toggleMobileMenu] = useState(false)
-    const {pushLink} = useContext(PageContext)
-
+    const {pushLink} = useAppContext()
 
     return <header className="bg-white shadow relative">
         <div className="absolute bottom-0 w-full">
