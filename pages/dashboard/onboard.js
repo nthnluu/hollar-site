@@ -1,6 +1,8 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import StepOne from "../../components/onboarding/StepOne";
 import StepTwo from "../../components/onboarding/StepTwo";
+import AddressAutocomplete from "../../components/form/AddressAutocomplete";
+import fb from "../../lib/firebase-config";
 
 export default function Onboard() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0)
@@ -30,6 +32,25 @@ export default function Onboard() {
 
     const currentStep = steps[currentStepIndex]
 
+    useEffect(() => {
+        const addBusiness = fb.functions().httpsCallable('createBusiness');
+        addBusiness({
+            "name": "Brightside Barbershop",
+            "address": "10277 University Ave",
+            "city": "San Diego",
+            "state": "CA",
+            "zipCode": "90210",
+            "created_by": "12",
+            "lat": -12.7,
+            "long": 97.2
+        })
+            .then(() => {
+                // Read result of the Cloud Function.
+                console.log("done!")
+            })
+            .catch(error => console.log(error))
+    }, [])
+
 
     return <div className="h-screen flex justify-center items-center md:bg-gray-50">
         <div className="p-8 md:border border-gray-200 rounded-lg md:shadow-lg max-w-xl w-full text-left bg-white">
@@ -41,3 +62,4 @@ export default function Onboard() {
         </div>
     </div>
 }
+
