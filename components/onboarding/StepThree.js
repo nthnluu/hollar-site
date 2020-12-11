@@ -15,7 +15,7 @@ const StepThree = ({currentStep, onBack, onContinue, formData, setFormData}) => 
         'Investor'
     ]
 
-    return <>
+    return <form onSubmit={onContinue}>
         <div className="mb-4 flex justify-center">
             <Autocomplete
                 id="custom-input-demo"
@@ -42,14 +42,14 @@ const StepThree = ({currentStep, onBack, onContinue, formData, setFormData}) => 
                         className="inline-flex items-center text-gray-700 px-4 py-2 border border-transparent text-base font-medium rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300">
                     Back
                 </button>
-                <button type="button" onClick={onContinue}
+                <button type="submit"
                         className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
                     Continue
                 </button>
             </div>
 
         </div>
-    </>
+    </form>
 }
 
-export default StepThree
+export default StepThree;
