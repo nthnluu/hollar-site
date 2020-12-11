@@ -5,6 +5,7 @@ import UserAvatar from "../visual/UserAvatar";
 import fb from "../../lib/firebase-config";
 import LoadingBar from "../visual/LoadingBar";
 import Link from "next/link";
+import PageContext from "../../lib/PageContext";
 
 const links = [{
     name: "Dashboard",
@@ -98,11 +99,11 @@ const ProfileDropdown = () => {
                                     <Menu.Item>
                                         {({active}) => (
                                             <button onClick={signOut}
-                                                className={`${
-                                                    active
-                                                        ? "bg-gray-100 text-gray-900"
-                                                        : "text-gray-700"
-                                                } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
+                                                    className={`${
+                                                        active
+                                                            ? "bg-gray-100 text-gray-900"
+                                                            : "text-gray-700"
+                                                    } flex justify-between w-full px-4 py-2 text-sm leading-5 text-left`}
                                             >
                                                 Sign out
                                             </button>
@@ -121,12 +122,15 @@ const ProfileDropdown = () => {
 // Mobile navigation menu; only visible on small screens
 const MobileMenu = () => {
     const {userProfile} = useContext(SessionContext)
+    const {pushLink} = useContext(PageContext)
+
     return <nav className="lg:hidden" aria-label="Global">
         <div className="pt-2 pb-3 px-2 space-y-1">
-            {links.map(link => <Link href={link.href} key={link.name}>
-                <a
-                   className="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">{link.name}</a>
-            </Link>)}
+            {links.map(link => <button onClick={() => pushLink(link.href)}
+                                       key={link.name}
+                                       className="block w-full text-left rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
+                {link.name}
+            </button>)}
         </div>
         <div className="border-t border-gray-200 pt-4 pb-3">
             <div className="px-4 flex items-center">
@@ -166,6 +170,7 @@ const MobileMenu = () => {
 
 export default function Navbar({loading}) {
     const [mobileMenu, toggleMobileMenu] = useState(false)
+    const {pushLink} = useContext(PageContext)
 
 
     return <header className="bg-white shadow relative">
@@ -232,12 +237,10 @@ export default function Navbar({loading}) {
                 </div>
             </div>
             <nav className="hidden lg:py-2 lg:flex lg:space-x-8" aria-label="Global">
-                {links.map(link => <Link href={link.href} key={link.name}>
-                    <a
-                       className="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
-                        {link.name}
-                    </a>
-                </Link>)}
+                {links.map(link => <button onClick={() => pushLink(link.href)} key={link.name}
+                                           className="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
+                    {link.name}
+                </button>)}
             </nav>
         </div>
 
