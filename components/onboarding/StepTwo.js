@@ -15,11 +15,11 @@ const StepTwo = ({currentStep, onContinue, onBack, formData, setFormData}) => {
     return <form onSubmit={onContinue}>
         <div className="space-y-4">
 
-            {/*Business name*/}
-            <TextInput id="business_name" onChange={event => setFormData(prevState => ({
-                ...prevState,
-                businessName: event.target.value
-            }))} value={formData.businessName} autoComplete="off" label="Business name" required/>
+            {/*/!*Business name*!/*/}
+            {/*<TextInput id="business_name" onChange={event => setFormData(prevState => ({*/}
+            {/*    ...prevState,*/}
+            {/*    businessName: event.target.value*/}
+            {/*}))} value={formData.businessName} autoComplete="off" label="Business name" required/>*/}
 
             <div className="flex justify-between">
 
@@ -53,7 +53,7 @@ const StepTwo = ({currentStep, onContinue, onBack, formData, setFormData}) => {
                              value={formData.state} onChange={event => setFormData(prevState => ({
                     ...prevState,
                     state: event.target.value
-                }))}/>
+                }))} value={formData.state}/>
 
                 {/*Zip Code*/}
                 <TextInput id="zip" onChange={event => setFormData(prevState => ({
@@ -64,6 +64,7 @@ const StepTwo = ({currentStep, onContinue, onBack, formData, setFormData}) => {
             </div>
         </div>
 
+        {/*Bottom of Forum*/}
         <div className="flex justify-between items-center mt-10">
             <Steps step={currentStep + 1} totalSteps={4}/>
             <div className="flex justify-between space-x-2">

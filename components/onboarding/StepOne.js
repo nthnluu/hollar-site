@@ -17,6 +17,7 @@ const StepTwo = ({currentStep, onContinue, formData, setFormData}) => {
 
         </div>
 
+        {/*Bottom of Forum*/}
         <div className="flex justify-between items-center mt-10">
             <Steps step={currentStep + 1} totalSteps={4}/>
             <div className="flex justify-between space-x-2">

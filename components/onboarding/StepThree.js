@@ -1,33 +1,40 @@
 import Steps from "./Steps";
-import ToggleSwitch from "../form/ToggleSwitch";
-import {useState} from "react";
+import React, {useState} from "react";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const StepThree = ({currentStep, onBack, onContinue}) => {
-    const [toggles, setToggles] = useState({
-        inPersonPayments: true,
-        onlinePayments: false
-    })
+const StepThree = ({currentStep, onBack, onContinue, formData, setFormData}) => {
+
+    const options = [
+        'Retailer',
+        'Health',
+        'Distributor',
+        'Food Service',
+        'Supplier',
+        'Manufacturer',
+        'Business Services',
+        'Investor'
+    ]
 
     return <>
-        <div className="space-y-4">
-            <div className="p-3 rounded-md border border-gray-300 shadow-sm flex items-center justify-between">
-                <div>
-                    <h2 className="text-lg font-semibold">In store payments</h2>
-                    <p className="text-gray-500 text-sm">Allow customers to place orders and pay in person.</p>
-                </div>
-                <ToggleSwitch label="In store payments" value={toggles.inPersonPayments}
-                              onChange={value => setToggles(prevState => ({...prevState, inPersonPayments: value}))}/>
-            </div>
-            <div className="p-3 rounded-md border border-gray-300 shadow-sm flex items-center justify-between">
-                <div>
-                    <h2 className="text-lg font-semibold">Online payments with Stripe</h2>
-                    <p className="text-gray-500 text-sm">Sign up for Stripe to accept online payments</p>
-                </div>
-                <ToggleSwitch label="In store payments" value={toggles.onlinePayments}
-                              onChange={value => setToggles(prevState => ({...prevState, onlinePayments: value}))}/>
-            </div>
-
+        <div className="mb-4 flex justify-center">
+            <Autocomplete
+                id="custom-input-demo"
+                options={options}
+                renderInput={(params) => (
+                    <div ref={params.InputProps.ref} className="w-full">
+                        <input id="address" name="address" type="text" {...params.inputProps} onChange={event => setFormData(prevState => ({
+                            ...prevState,
+                            category: event.target.value
+                        }))}
+                               className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md
+                               shadow-sm placeholder-gray-400 focus:outline-none focus:ring-orange-500
+                               focus:border-orange-500 md:text-lg"/>
+                    </div>
+                )}
+            />
         </div>
+
+        {/*Bottom of Forum*/}
         <div className="flex justify-between items-center mt-10">
             <Steps step={currentStep + 1} totalSteps={4}/>
             <div className="flex justify-between space-x-2">

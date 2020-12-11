@@ -8,12 +8,12 @@ export default function Onboard() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0)
     const [formData, setFormData] = useState({
         name: "",
-        category: "",
         streetAddress: "",
         unit: "",
         city: "",
         state: "",
-        zipCode: ""
+        zipCode: "",
+        category: "Option 1",
     })
 
     const onContinue = (event) => {
@@ -34,9 +34,9 @@ export default function Onboard() {
                               setFormData={setFormData} onBack={() => setCurrentStepIndex(0)}/>
         },
         {
-            title: "Payment Methods",
-            description: "What payment methods would you like to accept?",
-            content: <StepThree currentStep={currentStepIndex} onBack={() => setCurrentStepIndex(0)}/>
+            title: "Choose a category ",
+            description: "Choose one that best fits your business.",
+            content: <StepThree currentStep={currentStepIndex} onBack={() => setCurrentStepIndex(1)}/>
         }]
 
     const currentStep = steps[currentStepIndex]
