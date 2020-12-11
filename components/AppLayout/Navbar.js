@@ -5,6 +5,12 @@ import UserAvatar from "../visual/UserAvatar";
 import fb from "../../lib/firebase-config";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import LoadingBar from "../visual/LoadingBar";
+import Link from "next/link";
+
+const links = [{
+    name: "Dashboard",
+    href: '/dashboard'
+}]
 
 // Signs out the current Firebase Auth user
 const signOut = () => {
@@ -109,14 +115,10 @@ const MobileMenu = () => {
     const {userProfile} = useContext(SessionContext)
     return <nav className="lg:hidden" aria-label="Global">
         <div className="pt-2 pb-3 px-2 space-y-1">
-            <a href="#"
-               className="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Dashboard</a>
-            <a href="#"
-               className="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Jobs</a>
-            <a href="#"
-               className="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Applicants</a>
-            <a href="#"
-               className="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Company</a>
+            {links.map(link => <Link href={link.href} key={link.name}>
+                <a
+                   className="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">{link.name}</a>
+            </Link>)}
         </div>
         <div className="border-t border-gray-200 pt-4 pb-3">
             <div className="px-4 flex items-center">
@@ -222,22 +224,12 @@ export default function Navbar({loading}) {
                 </div>
             </div>
             <nav className="hidden lg:py-2 lg:flex lg:space-x-8" aria-label="Global">
-                <a href="#"
-                   className="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
-                    Dashboard
-                </a>
-                <a href="#"
-                   className="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
-                    Jobs
-                </a>
-                <a href="#"
-                   className="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
-                    Applicants
-                </a>
-                <a href="#"
-                   className="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
-                    Company
-                </a>
+                {links.map(link => <Link href={link.href} key={link.name}>
+                    <a
+                       className="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
+                        {link.name}
+                    </a>
+                </Link>)}
             </nav>
         </div>
 
