@@ -11,7 +11,7 @@ export default function Home() {
                 </Link>
 
             </div>
-            <h1 className="text-6xl font-bold text-gray-900">Explore, shop, and earn rewards from local businesses.</h1>
+            <h1 className="text-6xl font-bold text-gray-900 font-display">Explore, shop, and earn rewards from local businesses.</h1>
         </div>
     )
 }
