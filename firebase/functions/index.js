@@ -64,13 +64,15 @@ exports.createBusiness = functions.https.onCall((data, context) => {
     })
         .then((res) => {
             // Add newly created business to location index
+            const newBusinessID = res.data.data['insert_business'].returning[0].id
             const firebaseRef = admin.database().ref('businessLocations');
             let geoFire = new geofire.GeoFire(firebaseRef);
-            geoFire.set(res.data.data['insert_business'].returning[0].id, [lat, long])
+            geoFire.set(newBusinessID, [lat, long])
                 .then(() => {
                     console.log("Provided key has been added to GeoFire");
                 })
                 .catch((error) => console.log(`Error: ${error}`))
+            return newBusinessID
         })
         .catch(error => console.log(error))
 });
