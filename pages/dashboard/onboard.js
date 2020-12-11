@@ -5,9 +5,12 @@ import StepTwo from "../../components/onboarding/StepTwo";
 export default function Onboard() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0)
     const [formData, setFormData] = useState({
-        businessName: "",
-        website: "",
-        locationCount: 1
+        name: "",
+        streetAddress: "",
+        unit: "",
+        city: "",
+        state: "",
+        zipCode: ""
     })
 
     const onContinue = (event) => {

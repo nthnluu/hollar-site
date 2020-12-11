@@ -20,51 +20,62 @@ const StepOne = ({currentStep, onContinue, formData, setFormData}) => {
                 businessName: event.target.value
             }))} value={formData.businessName} autoComplete="off" label="Business name" required/>
 
-            {/*Website*/}
-            <TextInput id="website" onChange={event => setFormData(prevState => ({
-                ...prevState,
-                website: event.target.value
-            }))} value={formData.website} autoComplete="off" label="Website (optional)" type="url"/>
+            <div className="flex justify-between">
 
-            {/*Number of locations*/}
-            <TextInput id="location_count" onChange={event => setFormData(prevState => ({
-                ...prevState,
-                locationCount: event.target.value
-            }))} value={formData.locationCount} autoComplete="off" label="Number of locations" required type="number"/>
+                {/*Street Address*/}
+                <TextInput id="street_address" onChange={event => setFormData(prevState => ({
+                    ...prevState,
+                    streetAddress: event.target.value
+                }))} value={formData.streetAddress} autoComplete="street-address" label="Street address" required
+                           type="text"/>
 
-            {/*Street Address*/}
-            <TextInput id="street_address" onChange={event => setFormData(prevState => ({
-                ...prevState,
-                streetAddress: event.target.value
-            }))} value={formData.streetAddress} autoComplete="street-address" label="Street address" required
-                       type="text"/>
+                {/*Suite/Unit*/}
+                <div className="w-1/4">
+                    <TextInput id="unit" onChange={event => setFormData(prevState => ({
+                        ...prevState,
+                        unit: event.target.value
+                    }))} value={formData.unit} autoComplete="off" label="Suite/Unit"/>
+                </div>
 
-            {/*City, State, Zip*/}
+            </div>
+
             <div className="grid grid-cols-3 gap-3">
+
+                {/*City*/}
                 <TextInput id="city" onChange={event => setFormData(prevState => ({
                     ...prevState,
                     city: event.target.value
                 }))} value={formData.city} autoComplete="address-level2" label="City" type="text"/>
+
+                {/*State*/}
                 <SelectInput values={stateAbbreviations} label="State" id="state" autoComplete="address-level1"
                              value={formData.state} onChange={event => setFormData(prevState => ({
                     ...prevState,
                     state: event.target.value
                 }))}/>
+
+                {/*Zip Code*/}
                 <TextInput id="zip" onChange={event => setFormData(prevState => ({
                     ...prevState,
                     zip: event.target.value
                 }))} value={formData.zip} autoComplete="postal-code" label="ZIP/Postal Code" type="text"/>
+
             </div>
         </div>
+
         <div className="flex justify-between items-center mt-10">
             <Steps step={currentStep + 1} totalSteps={4}/>
             <div className="flex justify-between space-x-2">
                 <button type="submit"
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                        className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium
+                        rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none
+                        focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
                     Continue
                 </button>
             </div>
         </div>
+        <h3 className="font-thin mt-4 flex justify-center">By continuing you agree to the
+            <a href="#">Terms of Service and</a> <a href="#">Privacy Policy</a> </h3>
     </form>
 }
 
