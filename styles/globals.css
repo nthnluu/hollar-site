@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+button {
+    @apply focus:outline-none
+}
 .slider{
     position:absolute;
     width:1000px;

@@ -3,13 +3,21 @@ import {useContext, useState} from "react";
 import SessionContext from "../../lib/SessionContext";
 import UserAvatar from "../visual/UserAvatar";
 import fb from "../../lib/firebase-config";
-import LinearProgress from "@material-ui/core/LinearProgress";
 import LoadingBar from "../visual/LoadingBar";
 import Link from "next/link";
 
 const links = [{
     name: "Dashboard",
     href: '/dashboard'
+}, {
+    name: "Reviews",
+    href: '/dashboard/reviews'
+}, {
+    name: "Promotions",
+    href: '/dashboard/promotions'
+}, {
+    name: "My Business",
+    href: '/dashboard/reviews'
 }]
 
 // Signs out the current Firebase Auth user
