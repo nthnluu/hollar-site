@@ -6,24 +6,36 @@ import WithGraphQL from "../../lib/with-graphql";
 import useSession from "../../lib/useSession";
 import FullscreenLoader from "../visual/FullscreenLoader";
 import Sidebar from "./Sidebar";
+import PageContext from "../../lib/PageContext";
 
 const PageContent = ({session, sidebar, content}) => {
     const [isLoading, toggleIsLoading] = useState(false)
+    const router = useRouter()
+
+    const pushLink = (href) => {
+        toggleIsLoading(true)
+        router.push(href)
+            .then(() => toggleIsLoading(false))
+            .catch(() => toggleIsLoading(false))
+    }
+
     return <SessionContext.Provider value={session}>
         <WithGraphQL token={session.token}>
-            <div className="bg-gray-100">
-                <Navbar loading={isLoading}/>
-                <main
-                    className={`max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 ${isLoading && "opacity-25 pointer-events-none"} transition-opacity duration-300`}>
-                    <div className={`${sidebar && 'lg:grid'} lg:grid-cols-12 lg:gap-x-5`}>
-                        {sidebar &&  <Sidebar onClick={val => console.log(`You clicked on the ${val} button!`)} sidebar={sidebar}/>}
-                        {/* Payment details */}
-                        <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-                            {content}
+            <PageContext.Provider value={{pushLink}}>
+                <div className="bg-gray-100">
+                    <Navbar loading={isLoading}/>
+                    <main
+                        className={`max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 ${isLoading && "opacity-25 pointer-events-none"} transition-opacity duration-300`}>
+                        <div className={`${sidebar && 'lg:grid'} lg:grid-cols-12 lg:gap-x-5`}>
+                            {sidebar &&  <Sidebar onClick={val => console.log(`You clicked on the ${val} button!`)} sidebar={sidebar}/>}
+                            {/* Payment details */}
+                            <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+                                {content}
+                            </div>
                         </div>
-                    </div>
-                </main>
-            </div>
+                    </main>
+                </div>
+            </PageContext.Provider>
         </WithGraphQL>
     </SessionContext.Provider>
 }
