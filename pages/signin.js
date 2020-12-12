@@ -1,9 +1,10 @@
 import fb from "../lib/firebase-config";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import useSession from "../lib/useSession";
 import FullscreenLoader from "../components/visual/FullscreenLoader";
+import SessionContext from "../lib/SessionContext";
 
 const LoginScreen = () => {
     const signIn = (event) => {
@@ -130,7 +131,7 @@ const LoginScreen = () => {
 
 export default function SignIn() {
     const router = useRouter()
-    const {status} = useSession()
+    const {status} = useContext(SessionContext)
 
     switch (status) {
         case('LOADING'):

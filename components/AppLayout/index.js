@@ -1,11 +1,12 @@
 import Navbar from "./Navbar";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useRouter} from "next/router";
 import WithGraphQL from "../../lib/with-graphql";
 import useSession from "../../lib/useSession";
 import FullscreenLoader from "../visual/FullscreenLoader";
 import Sidebar from "./Sidebar";
 import PageContext from "../../lib/PageContext";
+import SessionContext from "../../lib/SessionContext";
 
 const PageContent = ({session, sidebar, content, onClick}) => {
     const [isLoading, toggleIsLoading] = useState(false)
@@ -39,7 +40,7 @@ const PageContent = ({session, sidebar, content, onClick}) => {
 
 export default function AppLayout({sidebar, children, onClick}) {
     const router = useRouter()
-    const session = useSession()
+    const session = useContext(SessionContext)
 
     // Change the rendered component based on auth state
     switch (session.status) {
