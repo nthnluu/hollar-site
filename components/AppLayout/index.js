@@ -30,7 +30,7 @@ const PageContent = ({session, sidebar, content, onClick, title}) => {
                 <Navbar loading={isLoading}/>
                 <main
                     className={`max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 ${isLoading && "opacity-25 pointer-events-none"} transition-opacity duration-300`}>
-                    <div className={`${sidebar && 'lg:grid'} lg:grid-cols-12 lg:gap-x-5`}>
+                    <div className={`${sidebar ? 'lg:grid' : 'pt-10 lg:pt-0'} lg:grid-cols-12 lg:gap-x-5`}>
                         {sidebar &&  <Sidebar onClick={onClick} sidebar={sidebar}/>}
                         {/* Payment details */}
                         <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
