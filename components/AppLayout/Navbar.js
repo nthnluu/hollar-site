@@ -118,12 +118,15 @@ const ProfileDropdown = () => {
 }
 
 // Mobile navigation menu; only visible on small screens
-const MobileMenu = () => {
+const MobileMenu = ({onClose}) => {
     const {currentUser, pushLink} = useAppContext()
 
     return <nav className="lg:hidden" aria-label="Global">
         <div className="pt-2 pb-3 px-2 space-y-1">
-            {links.map(link => <button onClick={() => pushLink(link.href)}
+            {links.map(link => <button onClick={() => {
+                onClose()
+                pushLink(link.href)
+            }}
                                        key={link.name}
                                        className="block w-full text-left rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">
                 {link.name}
@@ -241,7 +244,7 @@ export default function Navbar({loading}) {
         </div>
 
         {/* Mobile menu, toggle classes based on menu state. */}
-        {mobileMenu && <MobileMenu/>}
+        {mobileMenu && <MobileMenu onClose={() => toggleMobileMenu(false)}/>}
 
     </header>
 }
