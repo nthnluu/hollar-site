@@ -19,8 +19,10 @@ const PageContent = ({session, sidebar, content, onClick, title}) => {
             .catch(() => toggleIsLoading(false))
     }
 
+    const toggleLoading = () => toggleIsLoading(!isLoading)
+
     return <WithGraphQL token={session.token}>
-        <PageContext.Provider value={{pushLink, currentUser: session.userProfile}}>
+        <PageContext.Provider value={{pushLink, currentUser: session.userProfile, toggleLoading}}>
             <div className="bg-gray-100">
                 <Head>
                     <title>Hollar: {title}</title>
