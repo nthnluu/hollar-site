@@ -2,13 +2,13 @@ import Navbar from "./Navbar";
 import {useContext, useState} from "react";
 import {useRouter} from "next/router";
 import WithGraphQL from "../../lib/with-graphql";
-import useSession from "../../lib/useSession";
 import FullscreenLoader from "../visual/FullscreenLoader";
 import Sidebar from "./Sidebar";
 import PageContext from "../../lib/PageContext";
 import SessionContext from "../../lib/SessionContext";
+import Head from "next/head";
 
-const PageContent = ({session, sidebar, content, onClick}) => {
+const PageContent = ({session, sidebar, content, onClick, title}) => {
     const [isLoading, toggleIsLoading] = useState(false)
     const router = useRouter()
 
@@ -22,6 +22,9 @@ const PageContent = ({session, sidebar, content, onClick}) => {
     return <WithGraphQL token={session.token}>
         <PageContext.Provider value={{pushLink, currentUser: session.userProfile}}>
             <div className="bg-gray-100">
+                <Head>
+                    <title>Hollar: {title}</title>
+                </Head>
                 <Navbar loading={isLoading}/>
                 <main
                     className={`max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 ${isLoading && "opacity-25 pointer-events-none"} transition-opacity duration-300`}>
@@ -38,7 +41,7 @@ const PageContent = ({session, sidebar, content, onClick}) => {
     </WithGraphQL>
 }
 
-export default function AppLayout({sidebar, children, onClick}) {
+export default function AppLayout({sidebar, children, onClick, title}) {
     const router = useRouter()
     const session = useContext(SessionContext)
 
@@ -53,6 +56,6 @@ export default function AppLayout({sidebar, children, onClick}) {
             return <FullscreenLoader/>
         default:
             // Session loaded; user is logged in
-            return <PageContent session={session} sidebar={sidebar} content={children} onClick={onClick}/>
+            return <PageContent title={title} session={session} sidebar={sidebar} content={children} onClick={onClick}/>
     }
 }

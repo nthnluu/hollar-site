@@ -32,6 +32,10 @@ button {
     animation: decrease 2s 0.5s infinite;
 }
 
+.input-polyfill {
+    -webkit-appearance: none;
+}
+
 @keyframes increase {
     from { left: -5%; width: 5%; }
     to { left: 130%; width: 100%;}

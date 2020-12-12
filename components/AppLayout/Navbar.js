@@ -194,7 +194,7 @@ export default function Navbar({loading}) {
                                 </svg>
                             </div>
                             <input name="search" id="search"
-                                   className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
+                                   className="block w-full input-polyfill bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 sm:text-sm"
                                    placeholder="Search" type="search"/>
                         </div>
                     </div>
