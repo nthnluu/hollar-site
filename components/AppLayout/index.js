@@ -23,7 +23,7 @@ const PageContent = ({session, sidebar, content, onClick, title}) => {
 
     return <WithGraphQL token={session.token}>
         <PageContext.Provider value={{pushLink, currentUser: session.userProfile, toggleLoading}}>
-            <div className="bg-gray-100">
+            <div className="bg-gray-100 min-h-screen">
                 <Head>
                     <title>Hollar: {title}</title>
                 </Head>

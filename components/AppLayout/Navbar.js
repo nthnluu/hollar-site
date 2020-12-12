@@ -9,13 +9,13 @@ const links = [{
     name: "Dashboard",
     href: '/dashboard'
 }, {
-    name: "Reviews",
-    href: '/dashboard/reviews'
+    name: "Catalog",
+    href: '/dashboard/catalog'
 }, {
     name: "Promotions",
     href: '/dashboard/promotions'
 }, {
-    name: "My Business",
+    name: "Reviews",
     href: '/dashboard/reviews'
 }]
 
