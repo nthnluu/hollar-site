@@ -19,7 +19,7 @@ const sidebarItems = [{
 
 export default function Dashboard() {
 
-    return <AppLayout title="Dashboard" currentPage="home" sidebar={sidebarItems}>
+    return <AppLayout title="Dashboard" sidebar={sidebarItems} onClick={alert}>
         <section aria-labelledby="payment_details_heading">
             <form action="#" method="POST">
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -115,7 +115,7 @@ export default function Dashboard() {
                 </div>
             </form>
         </section>
-        {/* Plan */}
+        {/* Your page content goes here... */}
         <section aria-labelledby="plan_heading">
             <form action="#" method="POST">
                 <div className="shadow sm:rounded-md sm:overflow-hidden">

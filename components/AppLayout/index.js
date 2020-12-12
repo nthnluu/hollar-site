@@ -7,7 +7,7 @@ import FullscreenLoader from "../visual/FullscreenLoader";
 import Sidebar from "./Sidebar";
 import PageContext from "../../lib/PageContext";
 
-const PageContent = ({session, sidebar, content}) => {
+const PageContent = ({session, sidebar, content, onClick}) => {
     const [isLoading, toggleIsLoading] = useState(false)
     const router = useRouter()
 
@@ -25,7 +25,7 @@ const PageContent = ({session, sidebar, content}) => {
                 <main
                     className={`max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8 ${isLoading && "opacity-25 pointer-events-none"} transition-opacity duration-300`}>
                     <div className={`${sidebar && 'lg:grid'} lg:grid-cols-12 lg:gap-x-5`}>
-                        {sidebar &&  <Sidebar onClick={val => console.log(`You clicked on the ${val} button!`)} sidebar={sidebar}/>}
+                        {sidebar &&  <Sidebar onClick={onClick} sidebar={sidebar}/>}
                         {/* Payment details */}
                         <div className="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
                             {content}
@@ -37,7 +37,7 @@ const PageContent = ({session, sidebar, content}) => {
     </WithGraphQL>
 }
 
-export default function AppLayout({sidebar, children}) {
+export default function AppLayout({sidebar, children, onClick}) {
     const router = useRouter()
     const session = useSession()
 
@@ -52,6 +52,6 @@ export default function AppLayout({sidebar, children}) {
             return <FullscreenLoader/>
         default:
             // Session loaded; user is logged in
-            return <PageContent session={session} sidebar={sidebar} content={children}/>
+            return <PageContent session={session} sidebar={sidebar} content={children} onClick={onClick}/>
     }
 }
