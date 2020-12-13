@@ -13,6 +13,7 @@ const SectionsQuery = `query Sections {
       id
       price
       name
+      description
     }
   }
 }`
@@ -28,8 +29,11 @@ const CatalogPage = () => {
     }, [fetching])
 
     return <div className="px-4 space-y-6">
-        {!fetching && data['catalog_section'].map(section => <SectionList key={section.id} section={section}/>)}
-        <AddSection/>
+        {!fetching && <>
+            {data['catalog_section'].map(section => <SectionList key={section.id} section={section}/>)}
+            <AddSection/>
+        </>}
+
     </div>
 }
 
