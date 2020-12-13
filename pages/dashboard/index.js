@@ -1,5 +1,4 @@
 import AppLayout from "../../components/AppLayout";
-import useAppContext from "../../lib/useAppContext";
 
 const sidebarItems = [{
     name: 'Overview',

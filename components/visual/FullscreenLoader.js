@@ -4,7 +4,8 @@ import {useEffect, useState} from "react";
 export default function FullscreenLoader() {
     const [showRefreshButton, toggleRefreshButton] = useState(false)
     useEffect(() => {
-        setTimeout(() => toggleRefreshButton(true), 9000)
+        const refreshTimer = setTimeout(() => toggleRefreshButton(true), 9000)
+        return clearTimeout(refreshTimer)
     }, [])
 
     return <div className="flex justify-center items-center h-screen opacity-25">
