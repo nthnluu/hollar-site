@@ -8,8 +8,8 @@ import PageContext from "../../lib/PageContext";
 import SessionContext from "../../lib/SessionContext";
 import Head from "next/head";
 
-const PageContent = ({session, sidebar, content, onClick, title}) => {
-    const [isLoading, toggleIsLoading] = useState(false)
+const PageContent = ({session, sidebar, content, onClick, title, initialLoading = false}) => {
+    const [isLoading, toggleIsLoading] = useState(initialLoading)
     const router = useRouter()
 
     const pushLink = (href) => {
@@ -43,7 +43,7 @@ const PageContent = ({session, sidebar, content, onClick, title}) => {
     </WithGraphQL>
 }
 
-export default function AppLayout({sidebar, children, onClick, title}) {
+export default function AppLayout({sidebar, children, onClick, title, initialLoading}) {
     const router = useRouter()
     const session = useContext(SessionContext)
 
@@ -58,6 +58,6 @@ export default function AppLayout({sidebar, children, onClick, title}) {
             return <FullscreenLoader/>
         default:
             // Session loaded; user is logged in
-            return <PageContent title={title} session={session} sidebar={sidebar} content={children} onClick={onClick}/>
+            return <PageContent title={title} session={session} sidebar={sidebar} content={children} onClick={onClick} initialLoading={initialLoading}/>
     }
 }
