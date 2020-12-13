@@ -1,4 +1,4 @@
-export default function TextInput({label, id, type, autoComplete, required, value, onChange, error, helper, ...props}) {
+export default function TextInput({label, id, type, autoComplete = 'off', required, value, onChange, error, helper, ...props}) {
     return <div>
         <label htmlFor={id} className={`block text-sm font-medium ${error ? "text-red-600" : "text-gray-700"}`}>
             {label}

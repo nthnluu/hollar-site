@@ -19,7 +19,7 @@ const PageContent = ({session, sidebar, content, onClick, title}) => {
             .catch(() => toggleIsLoading(false))
     }
 
-    const toggleLoading = () => toggleIsLoading(!isLoading)
+    const toggleLoading = (val) => toggleIsLoading(val)
 
     return <WithGraphQL token={session.token}>
         <PageContext.Provider value={{pushLink, currentUser: session.userProfile, toggleLoading}}>
